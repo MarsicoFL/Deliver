@@ -11,4 +11,5 @@ https://zenodo.org/record/3981033
 
 https://github.com/edg1983?tab=followers
 
-dat
+The Human Pangenome Project: a global
+resource to map genomic diversity
