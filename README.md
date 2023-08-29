@@ -1,7 +1,7 @@
 # Non-Coding-panGenome
 Non coding pangenome annotation 
 
-project
+project . . . .
 
 https://academic.oup.com/nar/article/50/5/2522/6541021
 
