@@ -10,25 +10,6 @@ We analyze **Napoli sequences**:
 
 **Objective:** Prioritize **non-coding variants** (regulatory genome) using population rarity and multi-source functional evidence, producing final **GREEN-VARAN Levels (L1–L4)** for downstream interpretation.
 
----
-
-## Pipeline at a Glance (Flowchart)
-
-```mermaid
-flowchart TD
-    A[Raw VCF (chr21, GATK)] --> B[Step 2: Add gnomAD AF<br/>INFO: gnomAD_AF, gnomAD_AF_nfe]
-    B --> C[Step 3: GREEN-VARAN run<br/>Uses AF thresholds + GREEN-DB]
-    C --> D[Step 4: Add ReMM score<br/>INFO: ReMM]
-    D --> E[Step 5: GREEN-VARAN run<br/>Integrates AF + ReMM]
-    E --> F[Step 6: Add ncER percentile<br/>INFO: ncER]
-    F --> G[Step 7: GREEN-VARAN run<br/>AF + ReMM + ncER]
-    G --> H[Step 8: Add FATHMM-MKL (non-coding)<br/>INFO: FATHMM_NC]
-    H --> I[Step 9: Final GREEN-VARAN run<br/>AF + ReMM + ncER + FATHMM]
-    I --> J[Outputs: Final VCF + TSV/logs<br/>Variants ranked L1–L4]
-```
-
----
-
 ## Why Each Resource Matters (Biological Focus)
 
 ### Step 2 — Add **gnomAD** Allele Frequencies
