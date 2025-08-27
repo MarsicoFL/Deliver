@@ -6,11 +6,11 @@
 We analyze **Napoli sequences**:
 
 * **5 samples** including **mothers and children**, and
-* **older reference sequences (grep)** for historical comparison.
+* **older sequences (grep)** (from Silvia's paper).
 
 **Objective:** Prioritize **non-coding variants** (regulatory genome) using population rarity and multi-source functional evidence, producing final **GREEN-VARAN Levels (L1–L4)** for downstream interpretation.
 
-## Why Each Resource Matters (Biological Focus)
+### Step 1 — Variant calling (performed by Silvia).
 
 ### Step 2 — Add **gnomAD** Allele Frequencies
 
@@ -21,7 +21,7 @@ We analyze **Napoli sequences**:
 * **Population context.** gnomAD covers large, diverse cohorts, enabling robust separation of **population polymorphisms** from potential **disease alleles**.
 * **Cohort relevance.** `AF_nfe` provides a subgroup lens closer to typical European ancestry, reducing misclassification from population stratification.
 
-**Why it’s important:** Establishes the **first pass** of prioritization by rarity, preventing downstream steps from overvaluing common alleles.
+We want to establish the **first pass** of prioritization by rarity, preventing downstream steps from overvaluing common alleles.
 
 ---
 
@@ -40,7 +40,7 @@ We analyze **Napoli sequences**:
 * Integrates **functional genomics** (chromatin accessibility, histone marks), **conservation**, regulatory element context, and sequence features.
 * Trained specifically to distinguish **disease-relevant non-coding variants**, complementing coding-centric tools.
 
-**Why it’s important:** Adds **variant-level pathogenicity** likelihood rooted in **regulatory biology**, beyond mere location within a regulatory region.
+So, it adds **variant-level pathogenicity** likelihood rooted in **regulatory function**, beyond mere location within a regulatory region.
 
 ---
 
@@ -59,7 +59,7 @@ We analyze **Napoli sequences**:
 * Identifies **genomic neighborhoods** where variation is **depleted** in human populations, implying **functional constraint**.
 * Complements ReMM: whereas ReMM scores a **specific variant**, ncER scores the **surrounding region’s essentiality**.
 
-**Why it’s important:** Provides **regional constraint** context—variants in highly constrained non-coding regions are more likely to have **deleterious regulatory effects**.
+It provides **regional constraint** context—variants in highly constrained non-coding regions are more likely to have **deleterious regulatory effects**.
 
 ---
 
@@ -85,7 +85,7 @@ We analyze **Napoli sequences**:
 ### Step 9 — Final **GREEN-VARAN** Run (AF + ReMM + ncER + FATHMM)
 
 **What it does:** Produces **L1–L4** prioritization, integrating GREEN-DB with **population rarity** and **multi-source functional evidence**.
-**Biological contribution:** A cohesive, **evidence-weighted ranking** of non-coding variants for the Napoli cohort (mothers/children + historical grep), ready for expert review, segregation analysis, and functional follow-up.
+This is a cohesive, **evidence-weighted ranking** of non-coding variants for the Napoli cohort (mothers/children + historical grep), ready for expert review, segregation analysis, and functional follow-up.
 
 ---
 
