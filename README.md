@@ -10,7 +10,7 @@ We analyze **Napoli sequences**:
 
 **Objective:** Prioritize **non-coding variants** (regulatory genome) using population rarity and multi-source functional evidence, producing final **GREEN-VARAN Levels (L1–L4)** for downstream interpretation.
 
-### Step 1 — Variant calling (performed by Silvia).
+### Step 1 — Variant calling (done by Silvia).
 
 ### Step 2 — Add **gnomAD** Allele Frequencies
 
