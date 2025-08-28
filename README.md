@@ -6,7 +6,7 @@
 We analyze **Napoli sequences**:
 
 * **5 samples** including **mothers and children**, and
-* **older sequences (grep)** (from Silvia's paper).
+* **older sequences (grep)** from "Prioritization of putatively detrimental variants in euploid miscarriages" (https://www.nature.com/articles/s41598-022-05737-3).
 
 **Objective:** Prioritize **non-coding variants** (regulatory genome) using population rarity and multi-source functional evidence, producing final **GREEN-VARAN Levels (L1–L4)** for downstream interpretation.
 
