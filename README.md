@@ -101,13 +101,13 @@ This is a cohesive, **evidence-weighted ranking** of non-coding variants for the
 
 Finally, de novo mutations can be identified by comparing with mother data.
 
-## Expected Key Outputs
+## Outputs
 
-* `embryos.chr21.gnomad.vcf.gz`
-* `embryos.chr21.gnomad.remm.vcf.gz`
-* `embryos.chr21.gnomad.remm.ncer.vcf.gz`
-* `embryos.chr21.fullannot.vcf.gz`
-* `embryos.chr21.greenvaran.final.vcf.gz` (+ `.tbi`, TSV/logs)
+* `embryos.chr.gnomad.vcf.gz`
+* `embryos.chr.gnomad.remm.vcf.gz`
+* `embryos.chr.gnomad.remm.ncer.vcf.gz`
+* `embryos.chr.fullannot.vcf.gz`
+* `embryos.chr.greenvaran.final.vcf.gz` (+ `.tbi`, TSV/logs)
 
 ---
 
