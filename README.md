@@ -19,21 +19,24 @@ done by Silvia.
 **Biological contribution:**
 
 * **Rarity filter.** Common variants are usually benign; rare variants (e.g., AF < 0.01, < 0.001) are more suspicious in rare disease settings.
-* **Population context.** gnomAD covers large, diverse cohorts, enabling robust separation of **population polymorphisms** from potential **disease alleles**.
-* **Cohort relevance.** `AF_nfe` provides a subgroup lens closer to typical European ancestry, reducing misclassification from population stratification.
+* **Cohort** `AF_nfe` subgroup for this population (not for the Malaysia case).
 
-We want to establish the **first pass** of prioritization by rarity, preventing downstream steps from overvaluing common alleles.
+We want to establish the **first pass** of prioritization by rarity, preventing downstream steps from overvaluing too many alleles.
 
 ---
 
-### Step 3 — Re-run **GREEN-VARAN** (with AF)
+### Step 3 — Run **GREEN-VARAN** (with AF)
+
+Source: https://pubmed.ncbi.nlm.nih.gov/35234913/
 
 **What it does:** Re-evaluates variant levels using **GREEN-DB** (regulatory annotations) modulated by **rarity cutoffs** from gnomAD.
-**Biological contribution:** Aligns **regulatory evidence** with **population plausibility**—rare variants in regulatory elements rise in priority.
+**Biology:** Aligns **regulatory evidence** with **population plausibility**—rare variants in regulatory elements rise in priority.
 
 ---
 
 ### Step 4 — Add **ReMM** (Regulatory Mendelian Mutation) Score
+
+Source: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giad024/7135629?login=false
 
 **What it adds:** `ReMM` (0–1), a probabilistic predictor of **non-coding pathogenicity**.
 **Biological contribution:**
@@ -48,14 +51,16 @@ So, it adds **variant-level pathogenicity** likelihood rooted in **regulatory fu
 ### Step 5 — Re-run **GREEN-VARAN** (AF + ReMM)
 
 **What it does:** Prioritization reflects **concordance of rarity** and **predicted regulatory damage**.
-**Biological contribution:** A rare variant with **high ReMM** in a regulatory window becomes a **high-value candidate**.
+**Biology:** A rare variant with **high ReMM** in a regulatory window becomes a **high-value candidate**.
 
 ---
 
 ### Step 6 — Add **ncER** (non-coding Essential Regulation) Percentile
 
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC6868241/
+
 **What it adds:** `ncER` percentile—the **regional intolerance** to variation in non-coding space.
-**Biological contribution:**
+**Biology:**
 
 * Identifies **genomic neighborhoods** where variation is **depleted** in human populations, implying **functional constraint**.
 * Complements ReMM: whereas ReMM scores a **specific variant**, ncER scores the **surrounding region’s essentiality**.
@@ -64,14 +69,16 @@ It provides **regional constraint** context—variants in highly constrained non
 
 ---
 
-### Step 7 — Re-run **GREEN-VARAN** (AF + ReMM + ncER)
+### Step 7 — Run **GREEN-VARAN** again (AF + ReMM + ncER)
 
 **What it does:** Integrates **rarity**, **variant-level risk**, and **regional non-coding constraint**.
-**Biological contribution:** Triangulation—when all three align (rare + high ReMM + high ncER), confidence in **regulatory impact** strengthens substantially.
+**Biological contribution:** Triangulation, when all three align (rare + high ReMM + high ncER), confidence in **regulatory impact** strengthens.
 
 ---
 
 ### Step 8 — Add **FATHMM-MKL (Non-coding)** Score
+
+Source: https://academic.oup.com/bioinformatics/article/34/3/511/4104409
 
 **What it adds:** `FATHMM_NC`, an **independent ML predictor** of non-coding deleteriousness.
 **Biological contribution:**
@@ -79,16 +86,18 @@ It provides **regional constraint** context—variants in highly constrained non
 * Uses different features/modeling than ReMM, bringing **orthogonal evidence** (regulatory annotations, conservation, sequence context).
 * Agreement between **independent predictors** (ReMM & FATHMM-MKL) increases robustness.
 
-**Why it’s important:** Reduces **model-specific bias**—concordance across predictors is a strong signal for downstream curation.
+**Why?:** Reduces **model-specific bias**, concordance across predictors is a strong signal for downstream curation.
 
 ---
 
 ### Step 9 — Final **GREEN-VARAN** Run (AF + ReMM + ncER + FATHMM)
 
-**What it does:** Produces **L1–L4** prioritization, integrating GREEN-DB with **population rarity** and **multi-source functional evidence**.
+It produces **L1–L4** prioritization, integrating GREEN-DB with **population rarity** and **multi-source functional evidence**.
 This is a cohesive, **evidence-weighted ranking** of non-coding variants for the Napoli cohort (mothers/children + historical grep), ready for expert review, segregation analysis, and functional follow-up.
 
 ---
+
+Finally, de novo mutations can be identified by comparing with mother data.
 
 ## Expected Key Outputs
 
