@@ -15,6 +15,8 @@ done by Silvia.
 
 ### Step 2 — Add **gnomAD** Allele Frequencies
 
+Source: https://gnomad.broadinstitute.org/
+
 **What it adds:** `gnomAD_AF` (global), `gnomAD_AF_nfe` (non-Finnish European).
 **Biological contribution:**
 
@@ -109,39 +111,14 @@ Finally, de novo mutations can be identified by comparing with mother data.
 
 ---
 
-## Implementation Notes (Compact)
 
-* **Host vs Container:**
 
-  * **HOST:** `bcftools annotate/index/view` to add gnomAD, ReMM, ncER, FATHMM and manage headers.
-  * **CONTAINER:** `greenvaran smallvars` to re-run prioritization after each annotation layer.
-
-* **Genome Build & Contigs:** Ensure **GRCh38** across resources; fix `chr21` vs `21` mismatches before Step 2.
-
-* **Field Names:**
-
-  * gnomAD fields may appear as `AF`/`AF_nfe` in the resource VCF; we expose them as `gnomAD_AF`/`gnomAD_AF_nfe`.
-  * FATHMM field used here: `FATHMM_NC` (adjust QC grep accordingly).
-
-* **Indexing:** Always (re)index `*.vcf.gz` (`.tbi`) after each annotation for fast random access.
-
-* **QC “Quick Checks”:**
-
-  * Headers: `bcftools view -h <vcf.gz> | grep -E 'gnom|ReMM|ncER|FATHMM'`
-  * Spot-check counts (e.g., how many variants gain ReMM/ncER/FATHMM).
-
-* **Reproducibility:** Record resource versions (gnomAD build, ReMM/ncER/FATHMM release dates, GREEN-VARAN version/config).
-
----
-
-## Biological Summary
+## Sources Summary
 
 * **gnomAD**: Filters by **population rarity**, focusing attention on plausible disease alleles.
 * **ReMM**: Estimates **variant-level regulatory pathogenicity** in non-coding space.
 * **ncER**: Highlights **intolerant regions** where variation is likely deleterious.
 * **FATHMM-MKL (NC)**: Adds **independent ML evidence** for non-coding impact.
-
-**Iterative GREEN-VARAN re-runs** integrate these layers into a final, ranked list (L1–L4) of **candidate non-coding regulatory variants** for the Napoli cohort.
 
 ---
 
