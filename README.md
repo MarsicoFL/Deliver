@@ -120,6 +120,16 @@ Finally, de novo mutations can be identified by comparing with mother data.
 * **ncER**: Highlights **intolerant regions** where variation is likely deleterious.
 * **FATHMM-MKL (NC)**: Adds **independent ML evidence** for non-coding impact.
 
+
+# Filtering criteria
+Doing variant info table:
+
+bcftools query -i 'INFO/greendb_level=0 && INFO/gnomAD_AF_nfe<0.01 && INFO/ReMM>=0.9 && INFO/greendb_constraint>0.95 && INFO/ncER>=95 && INFO/FATHMM_NC>=0.9'   -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/gnomAD_AF_nfe\t%INFO/ReMM\t%INFO/ncER\t%INFO/FATHMM_NC\t%INFO/greendb_constraint\t%INFO/greendb_genes\n'   embryos.chr1.greenvaran.final.vcf.gz > candidates.chr1.strict.tsv
+
+Obtaining the genotypes table:
+
+bcftools query   -i 'INFO/greendb_level=0 && INFO/gnomAD_AF_nfe<0.01 && INFO/ReMM>=0.9 && INFO/greendb_constraint>0.9 && INFO/ncER>=95 && INFO/FATHMM_NC>=0.9'   -f '%CHROM\t%POS\t%REF\t%ALT[\t%SAMPLE=%GT]\n'   embryos.chr1.greenvaran.final.vcf.gz > candidates_with_genotypes.tsv
+
 ---
 
 .
