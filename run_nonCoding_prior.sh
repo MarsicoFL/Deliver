@@ -3,13 +3,13 @@ set -euo pipefail
 
 # ===== Parameters =====
 CHR=20
-SIF="/lustre/home/enza/franco/green-varan/greenvaran_1.3.3.sif"
+SIF=""
 
 # ===== Resources (HOST) =====
-RES="/lustre/home/enza/franco/green-varan/resources"
+RES=""
 RES38="$RES/GRCh38"
 
-GNOMAD_VCF="$RES38/GRCh38_gnomad.genomes.chr${CHR}.vcf.gz"   # per-chromosome
+GNOMAD_VCF=""   # per-chromosome
 GNOMAD_TBI="${GNOMAD_VCF}.tbi"
 
 REMM_TSV="$RES38/GRCh38_ReMM.tsv.gz"
@@ -22,8 +22,8 @@ DB_SCHEMA="/opt/green-varan/config/greendb_schema_v2.5.json"
 GV_CONF="/opt/green-varan/config/prioritize_smallvars.json"
 
 # ===== IO =====
-IN_DIR="/lustre/home/enza/franco/deliver/samples/grep/"
-OUT_DIR="/lustre/home/enza/franco/deliver/noncod_prior"
+IN_DIR=""
+OUT_DIR=""
 mkdir -p "$OUT_DIR"
 
 IN_VCF="$IN_DIR/grepEmbryos.chr${CHR}.gatk.vcf.gz"
@@ -56,7 +56,7 @@ bcftools view -h "$VCF_GNOMAD" | grep -E 'gnomAD_AF|gnomAD_AF_nfe' || true
 # ===== STEP 3 — GREEN-VARAN with gnomAD (CONTAINER) =====
 # NOTE: Use container path for --db to avoid host-path open errors.
 echo "[STEP 3] GREEN-VARAN with gnomAD…"
-apptainer exec -B "$RES:/opt/green-varan/resources" -B "/lustre/home/enza/franco/deliver:/deliver" "$SIF" \
+apptainer exec -B "$RES:/opt/green-varan/resources" -B "" "$SIF" \
   greenvaran smallvars \
   --invcf "/deliver/noncod_prior/embryos.chr${CHR}.gnomad.vcf.gz" \
   --outvcf "/deliver/noncod_prior/embryos.chr${CHR}.greenvaran.vcf.gz" \
@@ -75,7 +75,7 @@ bcftools index -f "$VCF_GNOMAD_REMM"
 # ===== STEP 5 — GREEN-VARAN with ReMM (CONTAINER) =====
 # Ensure --db uses the container path again.
 echo "[STEP 5] GREEN-VARAN with ReMM…"
-apptainer exec -B "$RES:/opt/green-varan/resources" -B "/lustre/home/enza/franco/deliver:/deliver" "$SIF" \
+apptainer exec -B "$RES:/opt/green-varan/resources" -B "" "$SIF" \
   greenvaran smallvars \
   --invcf "/deliver/noncod_prior/embryos.chr${CHR}.gnomad.remm.vcf.gz" \
   --outvcf "/deliver/noncod_prior/embryos.chr${CHR}.greenvaran.vcf.gz" \
@@ -95,7 +95,7 @@ bcftools index -f "$VCF_GNOMAD_REMM_NCER"
 # ===== STEP 7 — GREEN-VARAN with ncER (CONTAINER) =====
 # Again, use container path for --db.
 echo "[STEP 7] GREEN-VARAN with ncER…"
-apptainer exec -B "$RES:/opt/green-varan/resources" -B "/lustre/home/enza/franco/deliver:/deliver" "$SIF" \
+apptainer exec -B "$RES:/opt/green-varan/resources" -B "" "$SIF" \
   greenvaran smallvars \
   --invcf "/deliver/noncod_prior/embryos.chr${CHR}.gnomad.remm.ncer.vcf.gz" \
   --outvcf "/deliver/noncod_prior/embryos.chr${CHR}.greenvaran.vcf.gz" \
@@ -114,7 +114,7 @@ bcftools index -f "$VCF_FULL"
 # ===== STEP 9 — GREEN-VARAN final (CONTAINER) =====
 # Final call also fixed to use container path for --db.
 echo "[STEP 9] GREEN-VARAN FINAL…"
-apptainer exec -B "$RES:/opt/green-varan/resources" -B "/lustre/home/enza/franco/deliver:/deliver" "$SIF" \
+apptainer exec -B "$RES:/opt/green-varan/resources" -B "" "$SIF" \
   greenvaran smallvars \
   --invcf "/deliver/noncod_prior/embryos.chr${CHR}.fullannot.vcf.gz" \
   --outvcf "/deliver/noncod_prior/embryos.chr${CHR}.greenvaran.final.vcf.gz" \
