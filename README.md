@@ -1,7 +1,9 @@
 
  # Deliver - Prioritization of Non-Coding Variants
 
+This repository contains scripts and results related to the non-coding prioritization of the DELIVER project from the CNR (PRIN prot. 2020J84FAM).
 ## Cohort & Objective
+
 
 We analyze **Napoli sequences**:
 
