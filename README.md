@@ -13,7 +13,7 @@ We analyze **Napoli sequences**:
 **Objective:** Prioritize **non-coding variants** (regulatory genome) using population rarity and multi-source functional evidence, producing final **GREEN-VARAN Levels (L1–L4)** for downstream interpretation.
 
 ### Step 1 — Variant calling.
-done by Silvia.
+Already done. 
 
 ### Step 2 — Add **gnomAD** Allele Frequencies
 
@@ -101,9 +101,9 @@ This is a cohesive, **evidence-weighted ranking** of non-coding variants for the
 
 ---
 
-Finally, de novo mutations can be identified by comparing with mother data.
+Finally, de novo mutations can be identified by comparing with mothers data.
 
-## Outputs
+## Expected outputs
 
 * `embryos.chr.gnomad.vcf.gz`
 * `embryos.chr.gnomad.remm.vcf.gz`
