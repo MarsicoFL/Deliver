@@ -54,7 +54,6 @@ bcftools index -f "$VCF_GNOMAD"
 bcftools view -h "$VCF_GNOMAD" | grep -E 'gnomAD_AF|gnomAD_AF_nfe' || true
 
 # ===== STEP 3 — GREEN-VARAN with gnomAD (CONTAINER) =====
-# NOTE: Use container path for --db to avoid host-path open errors.
 echo "[STEP 3] GREEN-VARAN with gnomAD…"
 apptainer exec -B "$RES:/opt/green-varan/resources" -B "" "$SIF" \
   greenvaran smallvars \
@@ -73,7 +72,6 @@ bcftools annotate \
 bcftools index -f "$VCF_GNOMAD_REMM"
 
 # ===== STEP 5 — GREEN-VARAN with ReMM (CONTAINER) =====
-# Ensure --db uses the container path again.
 echo "[STEP 5] GREEN-VARAN with ReMM…"
 apptainer exec -B "$RES:/opt/green-varan/resources" -B "" "$SIF" \
   greenvaran smallvars \
@@ -93,7 +91,6 @@ bcftools annotate \
 bcftools index -f "$VCF_GNOMAD_REMM_NCER"
 
 # ===== STEP 7 — GREEN-VARAN with ncER (CONTAINER) =====
-# Again, use container path for --db.
 echo "[STEP 7] GREEN-VARAN with ncER…"
 apptainer exec -B "$RES:/opt/green-varan/resources" -B "" "$SIF" \
   greenvaran smallvars \
@@ -112,7 +109,6 @@ bcftools annotate \
 bcftools index -f "$VCF_FULL"
 
 # ===== STEP 9 — GREEN-VARAN final (CONTAINER) =====
-# Final call also fixed to use container path for --db.
 echo "[STEP 9] GREEN-VARAN FINAL…"
 apptainer exec -B "$RES:/opt/green-varan/resources" -B "" "$SIF" \
   greenvaran smallvars \
@@ -120,4 +116,4 @@ apptainer exec -B "$RES:/opt/green-varan/resources" -B "" "$SIF" \
   --outvcf "/deliver/noncod_prior/embryos.chr${CHR}.greenvaran.final.vcf.gz" \
   --db "$GREEN_DB_CNTR" --dbschema "$DB_SCHEMA" --config "$GV_CONF"
 
-echo "Done ✅  Final output: $VCF_GV_FINAL"
+echo "Done Final output: $VCF_GV_FINAL"
